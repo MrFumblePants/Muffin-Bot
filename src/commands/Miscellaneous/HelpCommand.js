@@ -16,7 +16,7 @@ module.exports = class HelpCommand extends BaseCommand {
      .addField('`c!kick`', 'Kicks a member from your server via mention or ID')
      .addField('`c!ban`', 'Bans a member from your server via mention or ID')
      .addField('`c!slowmode`', 'Changes the channel slowmode')
-     .addField('`c!clear`', 'Purges messages')
+  
 
 
      .setTimestamp()
