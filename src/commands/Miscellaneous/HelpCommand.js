@@ -9,7 +9,7 @@ module.exports = class HelpCommand extends BaseCommand {
 
   run(client, message, args) {
     
-     //Sort your commands into categories, and make seperate embeds for each category
+     //Sort commands into categories, and make seperate embeds for each category
 
      const moderation = new Discord.MessageEmbed()
      .setTitle('Moderation')

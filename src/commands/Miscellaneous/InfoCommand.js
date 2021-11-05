@@ -17,13 +17,13 @@ module.exports = class InfoCommand extends BaseCommand {
 
      const bot = new Discord.MessageEmbed()
      .setTitle('Bot')
-     .addField('`Owner`', '⛄√∞WalkerOfCookiゴゴゴ⛄#8066 or MrFumblyPants on Youtube')
-     .addField('`Bot Version`', 'v3.4')
+     .addField('`Owner`', '火炎#8066 or MrFumblyPants on Youtube')
+     .addField('`Bot Version`', 'v3.7')
      .setTimestamp()
 
      const Codingspecs = new Discord.MessageEmbed()
      .setTitle('Coding Specifications')
-     .addField('`Npm`', 'v6.14.9')
+     .addField('`Npm`', 'v6.14.15')
      .addField('`Node`', 'v14.15.3')
      .addField('`Discord`', 'v12.5.1')
      .addField('`Discord Paginations`', 'v1.0.3')
