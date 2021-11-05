@@ -6,7 +6,7 @@ module.exports = class BanCommand extends BaseCommand {
   }
 
   run(client, message, args) {
-    if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send('You can\'t fucking do that bitch!')
+    if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send('You can\'t do that!')
     if(!message.guild.me.hasPermission("Ban_MEMBERS")) return message.channel.send('I don\'t have the right permissions.')
 
     const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
