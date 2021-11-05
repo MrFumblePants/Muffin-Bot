@@ -15,7 +15,7 @@
           amount = 100;
         }
       }
-      await message.channel.bulkDelete(amount, true).then((_message) => {
+      message.channel.bulkDelete(amount, true).then((_message) => {
         message.channel.send(`Bot cleared \`${_message.size}\` messages :broom:`).then((sent) => {
           setTimeout(function () {
             sent.delete();
