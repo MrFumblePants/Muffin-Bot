@@ -6,7 +6,7 @@ module.exports = class KickCommand extends BaseCommand {
   }
 
   run(client, message, args) {
-    if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send('You can\'t use that!')
+    if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send('You really think you can kick this person!?')
     if(!message.guild.me.hasPermission("KICK_MEMBERS")) return message.channel.send('I don\'t have the right permissions.')
 
     const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]);
