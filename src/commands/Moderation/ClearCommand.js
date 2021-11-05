@@ -1,41 +1,25 @@
-
-  if (
-    message.content.toLowerCase().startsWith(prefix + 'clear') ||
-    message.content.toLowerCase().startsWith(prefix + 'c ')
-  ) {
-    if (!message.member.hasPermission('MANAGE_MESSAGES'))
-      return message.channel.send("You cant use this command since you're missing `manage_messages` perm");
-    if (!isNaN(message.content.split(' ')[1])) {
-      let amount = 0;
-      if (message.content.split(' ')[1] === '1' || message.content.split(' ')[1] === '0') {
-        amount = 1;
-      } else {
-        amount = message.content.split(' ')[1];
-        if (amount > 100) {
-          amount = 100;
-        }
+module.exports = {
+  run: async(client, msg, args) => {
+      let [ userId, limit ] = args.split(/\s+/);
+      if(!userId && !limit) {
+          let deletedMessages = await msg.channel.bulkDelete();
+          msg.channel.send(`${deletedMessages.size} messages were deleted.`);
       }
-      message.channel.bulkDelete(amount, true).then((_message) => {
-        message.channel.send(`Bot cleared \`${_message.size}\` messages :broom:`).then((sent) => {
-          setTimeout(function () {
-            sent.delete();
-          }, 2500);
-        });
-      });
-    } else {
-      message.channel.send('enter the amount of messages that you would like to clear').then((sent) => {
-        setTimeout(function () {
-          sent.delete();
-        }, 2500);
-      });
-    }
-  } else {
-    if (message.content.toLowerCase() === prefix + 'help clear') {
-      const newEmbed = new Discord.MessageEmbed().setColor('#00B2B2').setTitle('**Clear Help**');
-      newEmbed
-        .setDescription('This command clears messages for example `.clear 5` or `.c 5`.')
-        .setFooter(`Requested by ${message.author.tag}`, message.author.displayAvatarURL())
-        .setTimestamp();
-      message.channel.send(newEmbed);
-    }
-  }
+      if(!userId || !limit) return msg.channel.send('Please provide the correct arguments.');
+      let r = new RegExp(/^\d+$/);
+      if(!r.test(userId)) return msg.channel.send('Please provide a valid user id.');
+      if(isNaN(limit)) return msg.channel.send('Please provide a numeric value for limit');
+      if(limit > 100) return msg.channel.send('Limit must be less than or equal to 100.');
+      try {
+          let fetchedMessages = await msg.channel.messages.fetch({ limit });
+          let filteredMessages = fetchedMessages.filter(msg => msg.author.id === userId);
+          let deletedMessages = await msg.channel.bulkDelete(filteredMessages);
+          msg.channel.send(`${deletedMessages.size} messages were deleted.`);
+      }
+      catch(err) {
+          console.log(err);
+      }
+  },
+  aliases: ['purge'],
+  description: 'Deletes a number of messages from a user in a channel.'
+}
