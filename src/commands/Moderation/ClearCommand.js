@@ -1,4 +1,4 @@
-client.on('message', async (message) => {
+
   if (
     message.content.toLowerCase().startsWith(prefix + 'clear') ||
     message.content.toLowerCase().startsWith(prefix + 'c ')
@@ -39,4 +39,3 @@ client.on('message', async (message) => {
       message.channel.send(newEmbed);
     }
   }
-});
